@@ -10,17 +10,17 @@ class TodoContainer extends React.Component {
     todos: [
       {
         id: uuidv4(),
-        title: 'Setup development environment',
+        title: "Setup development environment",
         completed: true,
       },
       {
         id: uuidv4(),
-        title: 'Develop website and add content',
+        title: "Develop website and add content",
         completed: false,
       },
       {
         id: uuidv4(),
-        title: 'Deploy to live server',
+        title: "Deploy to live server",
         completed: false,
       },
     ],
@@ -42,9 +42,7 @@ class TodoContainer extends React.Component {
 
   delTodo = (id) => {
     this.setState({
-      todos: [
-        ...this.state.todos.filter((todo) => todo.id !== id),
-      ],
+      todos: [...this.state.todos.filter((todo) => todo.id !== id)],
     });
   };
 
@@ -59,6 +57,17 @@ class TodoContainer extends React.Component {
     });
   };
 
+  setUpdate = (updatedTitle, id) => {
+    this.setState({
+      todos: this.state.todos.map((todo) => {
+        if (todo.id === id) {
+          todo.title = updatedTitle;
+        }
+        return todo;
+      }),
+    });
+  };
+
   render() {
     return (
       <div className="container">
@@ -69,6 +78,7 @@ class TodoContainer extends React.Component {
             todos={this.state.todos}
             handleChangeProps={this.handleChange}
             deleteTodoProps={this.delTodo}
+            setUpdate={this.setUpdate}
           />
         </div>
       </div>
